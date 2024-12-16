@@ -1,9 +1,10 @@
 from django.forms import ModelForm
-from .models import Student
+from .models import System,Student
 
-class PhotoPostForm(ModelForm):
+class SystemForm(ModelForm):
     class Meta:
-        # モデルのクラス
-        model = PhotoPost
-        # フォームで使用するモデルのフィールドを指定
-        fields = ['category', 'title', 'comment', 'image1', 'image2']
+        model = System
+        
+class StudentForm(ModelForm):
+    class Meta:
+        model = Student

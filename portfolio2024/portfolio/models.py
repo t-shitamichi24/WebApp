@@ -3,20 +3,23 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Student(AbstractUser):
-    username = None
     # 学生番号　2447000 student_no
     student_no = models.IntegerField(
         verbose_name="学生番号",
         primary_key=True
     )
     # 氏名　下道 俊樹 student_name
-    student_name = models.CharField(
+    username = models.CharField(
         verbose_name="学生氏名",
-        max_length=20
+        max_length=20,
+        null=True
     )
     
     USERNAME_FIELD = "student_no"
-    REQUIRED_FIELDS = ['student_name']
+    REQUIRED_FIELDS = ['username']
+    
+    def __str__(self):
+        return self.username
 
 class System(models.Model):
     student = models.ForeignKey(
@@ -42,3 +45,6 @@ class System(models.Model):
     system_background = models.TextField(
         verbose_name= "システム背景"
     )
+
+    def __str__(self):
+        return self.system_name

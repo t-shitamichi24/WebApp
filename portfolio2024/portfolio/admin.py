@@ -3,8 +3,8 @@ from .models import Student,System
 
 # Register your models here.
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ("student_no","student_name")
-    list_display_links = ("student_no","student_name")
+    list_display = ("student_no","username")
+    list_display_links = ("student_no","username")
 admin.site.register(Student,StudentAdmin)
 
 class SystemAdmin(admin.ModelAdmin):
