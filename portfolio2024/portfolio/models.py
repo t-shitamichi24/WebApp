@@ -16,7 +16,6 @@ class Student(AbstractUser):
     )
     
     USERNAME_FIELD = "student_no"
-    REQUIRED_FIELDS = ['student_name']
 
 class System(models.Model):
     student = models.ForeignKey(
