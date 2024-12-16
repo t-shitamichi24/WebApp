@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Student(AbstractUser):
+    username = None
     # 学生番号　2447000 student_no
     student_no = models.IntegerField(
         verbose_name="学生番号",
