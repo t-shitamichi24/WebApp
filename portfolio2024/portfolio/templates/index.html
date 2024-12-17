@@ -6,24 +6,56 @@
 
 {% block contents %}
 <div class="header">
-  <h1>福岡情報ITクリエイター専門学校_第3期生年間制作</h1>
+  <h1>福岡情報ITクリエイター専門学校_情報IT学科年間制作作品集</h1>
 </div>
 <div class="container mt-5">
   <div class="row">
     <!-- Sample card template -->
     {% with ''|center:50 as range %}
-    {% for _ in range %}
+    {% for record in object_list %}
+    {% if record.system_name %}
+    <div class="col-md-4 mb-4">
+      <a href="#" style="text-decoration-line: none;">
+      <div class="card h-100">
+        {% if record.system_thumbnail %}
+        <img src="{{ record.system_thumbnail.url }}" alt="サムネイル画像" class="card-img-top" style="aspect-ratio: 16 / 9;">
+        {% else %}
+        <img src="{% static 'assets/noimage.png' %}" alt="サムネイル画像" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+          <p class="student-no">{{record.student.student_no}}</p>
+          <h5 class="student-name">{{record.student.username}}</h5>
+          {% if record.system_name %}
+          <h5 class="system-name">{{record.system_name}}</h5>
+          <p class="system-summary">{{record.system_summary}}</p>
+          {% else %}
+          <h5 class="system-name">システム未提出</h5>
+          {% endif %}
+        </div>
+      </div>
+      </a>
+    </div>
+    {% else %}
     <div class="col-md-4 mb-4">
       <div class="card h-100">
-        <img src="{% static 'assets/test.png' %}" alt="サムネイル画像" class="card-img-top">
+        {% if record.system_thumbnail %}
+        <img src="{{record.system_thumbnail}}" alt="サムネイル画像" class="card-img-top">
+        {% else %}
+        <img src="{% static 'assets/noimage.png' %}" alt="サムネイル画像" class="card-img-top">
+        {% endif %}
         <div class="card-body">
-          <p class="student-no">24-47000</p>
-          <h5 class="student-name">下道　俊樹</h5>
-          <h5 class="system-name">プロジェクトA</h5>
-          <p class="system-summary">このシステムは...</p>
+          <p class="student-no">{{record.student.student_no}}</p>
+          <h5 class="student-name">{{record.student.username}}</h5>
+          {% if record.system_name %}
+          <h5 class="system-name">{{record.system_name}}</h5>
+          {% else %}
+          <h5 class="system-name">システム未提出</h5>
+          {% endif %}
+          <p class="system-summary">{{record.system_summary}}</p>
         </div>
       </div>
     </div>
+    {% endif %}
     {% endfor %}
     {% endwith %}
   </div>

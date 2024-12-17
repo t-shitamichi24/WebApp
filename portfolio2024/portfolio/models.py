@@ -12,7 +12,7 @@ class Student(AbstractUser):
     username = models.CharField(
         verbose_name="学生氏名",
         max_length=20,
-        null=True
+        blank=True
     )
     
     USERNAME_FIELD = "student_no"
@@ -22,29 +22,44 @@ class Student(AbstractUser):
         return self.username
 
 class System(models.Model):
-    student = models.ForeignKey(
+    student = models.OneToOneField(
         Student,
         verbose_name="学生",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        primary_key=True
     )
     # システム名　ポートフォリオ system_name
     system_name = models.CharField(
         verbose_name="システム名",
-        max_length=20
+        max_length=20,
+        blank=True,
+        null=True
     )
     # システム概要　年間制作作品をまとめたサイト system_summary
     system_summary = models.TextField(
-        verbose_name="システム概要"
+        verbose_name="システム概要",
+        blank=True,
+        null=True
+    )
+    # システムURL
+    system_url = models.URLField(
+        verbose_name="システムURL",
+        blank=True,
+        null=True
     )
     # サムネイル画像 system_thumbnail
     system_thumbnail = models.ImageField(
         verbose_name="サムネイル画像",
-        upload_to= 'photos'
+        upload_to= 'photos',
+        blank=True,
+        null=True
     )
     # 制作背景　年間制作作品を多くの人に見てもらうため system_background
     system_background = models.TextField(
-        verbose_name= "システム背景"
+        verbose_name= "システム背景",
+        blank=True,
+        null=True
     )
 
     def __str__(self):
-        return self.system_name
+        return str(self.student)
