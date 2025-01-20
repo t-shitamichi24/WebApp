@@ -7,8 +7,11 @@
 {% block contents %}
 <div class="header">
   <h1 style="text-align: center;">福岡情報ITクリエイター専門学校_情報IT学科年間制作作品集
-
-    <a class="btn btn-dark" href="#">POST</a>
+    {% if user.is_authenticated %}
+    <a class="btn btn-dark" href="{% url 'portfolio:post' user.pk   %}">システム投稿</a>
+    {% else %}
+    <a class="btn btn-dark" href="{% url 'portfolio:login' %}">学生ログイン</a>
+    {% endif %}
   </h1>
 </div>
 <div class="container mt-5">
@@ -18,24 +21,24 @@
     {% for record in object_list %}
     {% if record.system_name %}
     <div class="col-md-4 mb-4">
-      <a href="{% url 'portfolio:detail' record.student.student_no %}" style="text-decoration-line: none;">
-      <div class="card h-100">
-        {% if record.system_thumbnail %}
-        <img src="{{ record.system_thumbnail.url }}" alt="サムネイル画像" class="card-img-top" style="aspect-ratio: 16 / 9;">
-        {% else %}
-        <img src="{% static 'assets/noimage.png' %}" alt="サムネイル画像" class="card-img-top">
-        {% endif %}
-        <div class="card-body">
-          <p class="student-no">{{record.student.student_no}}</p>
-          <h5 class="student-name">{{record.student.username}}</h5>
-          {% if record.system_name %}
-          <h5 class="system-name">{{record.system_name}}</h5>
-          <p class="system-summary">{{record.system_summary}}</p>
+      <a href="{% url 'portfolio:detail' record.pk %}" style="text-decoration-line: none;">
+        <div class="card h-100">
+          {% if record.system_thumbnail %}
+          <img src="{{ record.system_thumbnail.url }}" alt="サムネイル画像" class="card-img-top" style="aspect-ratio: 16 / 9;">
           {% else %}
-          <h5 class="system-name">システム未提出</h5>
+          <img src="{% static 'assets/noimage.png' %}" alt="サムネイル画像" class="card-img-top">
           {% endif %}
+          <div class="card-body">
+            <p class="student-no">{{record.student.student_no}}</p>
+            <h5 class="student-name">{{record.student.username}}</h5>
+            {% if record.system_name %}
+            <h5 class="system-name">{{record.system_name}}</h5>
+            <p class="system-summary">{{record.system_summary}}</p>
+            {% else %}
+            <h5 class="system-name">システム未提出</h5>
+            {% endif %}
+          </div>
         </div>
-      </div>
       </a>
     </div>
     {% else %}

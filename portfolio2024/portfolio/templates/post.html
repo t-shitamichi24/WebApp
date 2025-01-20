@@ -1,1 +1,35 @@
-{% }
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>学生プロジェクト詳細</title>{% endblock %}
+
+{% block contents %}
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>システム名</th>
+            <td>{{form.system_name}}</td>
+        </tr>
+        <tr>
+            <th>システム概要</th>
+            <td>{{form.system_summary}}</td>
+        </tr>
+        <tr>
+            <th>システムURL</th>
+            <td>{{form.system_url}}</td>
+        </tr>
+        <tr>
+            <th>サムネイル画像</th>
+            <td>{{form.system_thumbnail}}</td>
+        </tr>
+        <tr>
+            <th>創意工夫した内容</th>
+            <td>{{form.system_background}}</td>
+        </tr>
+    </table>
+    <hr>
+    <button type="submit">更新する</button>
+</form>
+{% endblock %}
