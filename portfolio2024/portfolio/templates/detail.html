@@ -2,18 +2,19 @@
 
 {% load static %}
 
-{% block title %}<title>学生プロジェクト詳細</title>{% endblock %}
-
 {% block contents %}
-<main>
-  <ul>
-    <li>氏名:{{object.student.username}}</li>
-    <li>システム名:{{object.system_name}}</li>
-    <li>システム概要:{{object.system_summary}}</li>
-    <li>システムURL:<a href={{object.system_url}}>{{object.system_url}}</a></li>
-    <li>創意工夫した内容:{{object.system_background}}</li>
-    <li><img src="{{object.system_thumbnail.url}}" style="max-width: 50vw; opacity: 0.2; border: solid;"></li>
-    </ul>
+  <div class="container">
+  <ul class="list-group">
+    <li class="list-group-item">氏名:{{object.student.username}}</li>
+    <li class="list-group-item">システム名:{{object.system_name}}</li>
+    <li class="list-group-item">システム概要:{{object.system_summary}}</li>
+    <li class="list-group-item">システムURL:<a href={{object.system_url}}>{{object.system_url}}</a></li>
+    <li class="list-group-item">創意工夫した内容:{{object.system_background}}</li>
+  </ul>
+    {% if object.system_thumbnail %}
+      <img src="{{object.system_thumbnail.url}}" style="max-width: 50vw;border: solid;">
+      <br>
+    {% endif %}
     <a href="javascript:history.back();">戻る</a>
-</main>
+</div>
 {% endblock %}
