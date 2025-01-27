@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+def user_path(instance, filename):
+    return f'photos/{instance.student.student_no}'
+
 # Create your models here.
 class Student(AbstractUser):
     # 学生番号　2447000 student_no
@@ -50,7 +53,7 @@ class System(models.Model):
     # サムネイル画像 system_thumbnail
     system_thumbnail = models.ImageField(
         verbose_name="サムネイル画像",
-        upload_to= 'photos',
+        upload_to= user_path,
         blank=True,
         null=True
     )

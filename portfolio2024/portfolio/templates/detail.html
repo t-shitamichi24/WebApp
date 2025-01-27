@@ -7,9 +7,9 @@
   <ul class="list-group">
     <li class="list-group-item">氏名:{{object.student.username}}</li>
     <li class="list-group-item">システム名:{{object.system_name}}</li>
-    <li class="list-group-item">システム概要:{{object.system_summary}}</li>
+    <li class="list-group-item" style="white-space: pre-wrap;">システム概要:<br>{{object.system_summary}}</li>
     <li class="list-group-item">システムURL:<a href={{object.system_url}}>{{object.system_url}}</a></li>
-    <li class="list-group-item">創意工夫した内容:{{object.system_background}}</li>
+    <li class="list-group-item" style="white-space: pre-wrap;">創意工夫した内容:<br>{{object.system_background}}</li>
   </ul>
     {% if object.system_thumbnail %}
       <img src="{{object.system_thumbnail.url}}" style="max-width: 50vw;border: solid;">
